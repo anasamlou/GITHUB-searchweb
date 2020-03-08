@@ -26,35 +26,53 @@
         <p>Stalk people's GitHub</p>
     </div>
         
-    <div class="container">
+    <div class="container" >
+
         <div class="row">
+            <div class="container" id="datos">
+                <h3>SEARCH</h3>
+                <div class="form-group">
+                    <label for="gitname">GitHub ID:</label>
+                    <input id="textboxEntry" type="text" class="form-control" placeholder="Enter the GitHub username">
+                    <div class="valid-feedback">Unvalid or empty input.</div>
+                    <div class="invalid-feedback"></div>
+                    <div class="btn-group">
+                        <button  href="#" id="submit" type="button" class="btn btn-success">GO!</button>
+                        <button href="#" id="remove" type="button" class="btn btn-primary">REMOVE DATA</button>
+                    </div>
+                </div>
+                <div class="row">
 
-        <div class="col-sm-4">
-            <h3>SEARCH</h3>
-            <div class="form-group">
-                <label for="usr">GitHub ID:</label>
-                <input id="textboxEntry" type="text" class="form-control" placeholder="Enter the GitHub username">
-                <button  href="#" id="boton" type="button" class="btn btn-success">GO!</button>
+                
+                    <div class="col-sm-4" id="fotoperfilgrid">
+                     <img src="url" alt="--> his Profile Picture" id = "foto" width="100" height="100">
+                    </div>
+                </div>      
             </div>
-        </div>
 
-        <div class="col-sm-4">
-            <h3>RESULTS</h3>
-            <table class="table tabl-bordered">
-                
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Followers</th>
-                </tr>
-                
-                <tr>
-                    <div id="outname"></div>
-                    <td>good programmer</td>
-                    <div id="outfollowers">
-                </tr>
-                
-            </table>
+            <div class="col-sm-4">
+            </div>
+                <div class="col-sm-4">
+                    <h3>RESULTS</h3>
+                    <table class="table tabl-bordered">
+                        
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Followers</th>
+                        </tr>
+                        
+                        <tr>
+                            <div class="col-sm-2" ></div>
+
+                            <div class="col-sm-2" id=dataid></div>
+                            <td>good programmer</td>
+                            <div class="col-sm-2" ></div>
+                            <div class="col-sm-2" id=datafollowers></div>
+                        </tr>
+                    </div>
+                </table>
+            </div>      
             
                 
         
