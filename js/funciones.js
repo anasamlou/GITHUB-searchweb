@@ -1,65 +1,74 @@
-
-
 $(document).ready(function(){
-    $("button").click(function(){
-      $(this).get();
-    });
-  });
-texto = textboxentry 
-url = "https://api.github.com/users/"+texto
-  $.getJSON(url, function(data) {
-        
-        var text = `login: ${data.login}<br>
-                    public_repos: ${data.public_repos}<br>
-                    followers: ${data.followers}`
-                    
-        
-                    $(".outname").html(text.login);
-                    $(".followers").html(text.followers);
-  }
-$(document).ready(function() {
-  $("#datos").hide();
-  $("#submit").click(function () {
-      $("#dataname").empty()
-      $("#dataid").empty()
-      $("#datafollowing").empty()
-      $("#datafollowers").empty()
-      $("#datalocation").empty()
-      $("#datamail").empty()
-      $("#foto").empty()
-      var contentToRemove = document.querySelectorAll("#lineatabla");
-      $(contentToRemove).remove();
-      $.get("https://api.github.com/users/" + $("#gitname").val(), function (data) {
-          $("#datos").show();0
-          $("#dataname").append(data.name)
-          $("#dataid").append(data.id)
-          $("#datafollowing").append(data.following)
-          $("#datafollowers").append(data.followers)
-          $("#datalocation").append(data.location)
-          $("#datamail").append(data.email)
-          $("#foto").attr("src",data.avatar_url)
-          $.get(data.repos_url, function (datarepos) {
-              var content = "<tbody>"
-              for(i=0; i<parseInt(data.public_repos); i++){
-                  content += '<tr id ="lineatabla"><td>' + datarepos[i].name + '</td>'+'<td>' + datarepos[i].language +'</td><td>' + datarepos[i].html_url +'</td></tr>';
-              }
-              content += "</tbody>"
+  jQuery.noConflict();
+  console.log("Hola m!");
+  var url = "https://api.github.com/users/anasamlou";
+  $("#textboxEntry").keypress(function (event) {
+    if (event.key === "Enter") {
+        $("#boton").click();
+    }
+  }); 
 
-              $('#tablarepos').append(content);
+  $("#boton").click(function(){
+    id = $("#textboxEntry").val();
+    console.log(id);
+    var url = "https://api.github.com/users/"+id;
+
+    requestJSON(url, function (json) {
+      username = json.login;
+      followers = json.followers;
+      repos = json.repos_url;
+      var output = {username,followers,repos};
+      $('#dataid').html("<p>"+output.username+"</p>");
+      $('#URLrepositories').html("<p>"+output.repos+"<p>");
+      $('#followers').html("<p>"+output.followers+"<p>");
+      var namerepo = [];
+      $.getJSON(repos, function (result) {
+        $.each(result, function (i, field) {
+            var number = i + 1;
+            namerepo.push(result[i].name);
+            //console.log(number+namerepo); 
+           $('#repositories').html("<p>"+namerepo+"</p>");
+           $('#numrepos').html("Total repos: "+i)
+          
           });
+
+        });
+        
+
       });
-  });
-  $("#remove").click(function () {
-      $("#datos").hide();
-      $("#dataname").empty()
-      $("#dataid").empty()
-      $("#datafollowing").empty()
-      $("#datafollowers").empty()
-      $("#datalocation").empty()
-      $("#datamail").empty()
-      $("#foto").empty()
-      var contentToRemove = document.querySelectorAll("#lineatabla");
-      $(contentToRemove).remove();
-  });
+      
+    });
+    function requestJSON(url,callback) {
+      $.ajax({
+          url: url,
+          complete: function (xhr) {
+              callback.call(null, xhr.responseJSON);
+          }
+      });
+  }
+      
 });
+
+    
+    
+    
+    // var getJSON = function(url, callback) {
+    //   var xhr = new XMLHttpRequest();
+    //   xhr.open('GET', url, true);
+    //   xhr.responseType = 'json';
+    //   xhr.onload = function() {
+    //     var status = xhr.status;
+    //     if (status === 200) {
+    //       callback(null, xhr.response);
+    //       console.log(xhr.response);
+    //     } else {
+    //       callback(status, xhr.response);
+    //     }
+    //   };
+    //   xhr.send();
+    // };
+    
+    
+    
+    // document.getElementById("dataid").innerHTML= username;
 
