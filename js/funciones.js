@@ -47,22 +47,25 @@ $(document).ready(function(){
         
 
     });
+
+
+
     $("#remove").click(function () {
       $("#dataid").empty()
       $("#repositories").empty()
       $("#followers").empty()
       $("#fotocolumn").empty()
-  });
-      
     });
-    $("button").click(function(){
+      
+
+    $("#buttonFB").click(function(){
       $("#buttonFB").attr("href", "https://www.facebook.com");
     });
-    $("button").click(function(){
+    $("#buttonTW").click(function(){
       $("#buttonTW").attr("href", "https://www.twitter.com");
     });
-    $("button").click(function(){
-      $("#buttonFB").attr("href", "https://www.linkedin.com");
+    $("#buttonLI").click(function(){
+      $("#buttonLI").attr("href", "https://www.linkedin.com");
     });
                  
 
@@ -79,3 +82,6 @@ $(document).ready(function(){
       
 
     }
+
+  });     
+
