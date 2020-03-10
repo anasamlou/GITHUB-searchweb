@@ -1,14 +1,13 @@
 $(document).ready(function(){
   jQuery.noConflict();
   console.log("Hola m!");
-  var url = "https://api.github.com/users/anasamlou";
   $("#textboxEntry").keypress(function (event) {
     if (event.key === "Enter") {
-        $("#boton").click();
+        $("#GObutton").click();
     }
   }); 
 
-  $("#boton").click(function(){
+  $("#GObutton").click(function(){
     id = $("#textboxEntry").val();
     console.log(id);
     var url = "https://api.github.com/users/"+id;
@@ -17,10 +16,14 @@ $(document).ready(function(){
       username = json.login;
       followers = json.followers;
       repos = json.repos_url;
-      var output = {username,followers,repos};
+      serialID = json.id;
+      foto = json.avatar_url;
+      var output = {username,followers,repos,serialID};
       $('#dataid').html("<p>"+output.username+"</p>");
       $('#URLrepositories').html("<p>"+output.repos+"<p>");
       $('#followers').html("<p>"+output.followers+"<p>");
+      $('#serialID').html("<p>"+output.serialID+"<p>");
+      $("#foto").attr("src",foto)
       var namerepo = [];
       $.getJSON(repos, function (result) {
         $.each(result, function (i, field) {
@@ -33,11 +36,39 @@ $(document).ready(function(){
           });
 
         });
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const image = document.getElementById('source');
+
+        image.addEventListener('load', e => {
+        ctx.drawImage(image, 33, 71, 104, 124, 21, 20, 87, 104);
+        });
+      });
         
 
-      });
+    });
+    $("#remove").click(function () {
+      $("#dataid").empty()
+      $("#repositories").empty()
+      $("#followers").empty()
+      $("#fotocolumn").empty()
+  });
       
     });
+    $("button").click(function(){
+      $("#buttonFB").attr("href", "https://www.facebook.com");
+    });
+    $("button").click(function(){
+      $("#buttonTW").attr("href", "https://www.twitter.com");
+    });
+    $("button").click(function(){
+      $("#buttonFB").attr("href", "https://www.linkedin.com");
+    });
+                 
+
+
+
+  
     function requestJSON(url,callback) {
       $.ajax({
           url: url,
@@ -45,30 +76,6 @@ $(document).ready(function(){
               callback.call(null, xhr.responseJSON);
           }
       });
-  }
       
-});
 
-    
-    
-    
-    // var getJSON = function(url, callback) {
-    //   var xhr = new XMLHttpRequest();
-    //   xhr.open('GET', url, true);
-    //   xhr.responseType = 'json';
-    //   xhr.onload = function() {
-    //     var status = xhr.status;
-    //     if (status === 200) {
-    //       callback(null, xhr.response);
-    //       console.log(xhr.response);
-    //     } else {
-    //       callback(status, xhr.response);
-    //     }
-    //   };
-    //   xhr.send();
-    // };
-    
-    
-    
-    // document.getElementById("dataid").innerHTML= username;
-
+    }
