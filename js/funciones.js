@@ -23,7 +23,8 @@ $(document).ready(function(){
       $('#URLrepositories').html("<p>"+output.repos+"<p>");
       $('#followers').html("<p>"+output.followers+"<p>");
       $('#serialID').html("<p>"+output.serialID+"<p>");
-      $("#foto").attr("src",foto)
+      $("#foto").attr("src",foto);
+      $("#foto").show();
       var namerepo = [];
       $.getJSON(repos, function (result) {
         $.each(result, function (i, field) {
@@ -54,7 +55,7 @@ $(document).ready(function(){
       $("#dataid").empty()
       $("#repositories").empty()
       $("#followers").empty()
-      $("#fotocolumn").empty()
+      $("#foto").hide()
     });
       
 
